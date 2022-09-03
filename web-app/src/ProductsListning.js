@@ -18,7 +18,7 @@ const ProductsListning = () => {
         // TODO: Add error reporting
             return response.json();
         }).then(json => {
-            setAnnouncements(json?.state?.announcements ?? []);
+            setAnnouncements(json);
         });
     }, []);
 
@@ -51,17 +51,17 @@ const ProductsListning = () => {
         }
     ];
 
-    const onClick = async () => {
-        let transaction = await arweave.createTransaction({
-            data: "Some Data"
-        });
-        transaction.addTag('Content-Type', 'text/html');
-        arweave.transactions.sign(transaction);    
-    };
+    // const onClick = async () => {
+    //     let transaction = await arweave.createTransaction({
+    //         data: "Some Data"
+    //     });
+    //     transaction.addTag('Content-Type', 'text/html');
+    //     arweave.transactions.sign(transaction);    
+    // };
 
     return (
         <Grid container spacing={2}>
-            {products.map((product, index) => (
+            {announcements.map((product, index) => (
                 <Grid item xs={6} mt={3} key={index}>
                     <Card>
                         <CardHeader title={product.title} />

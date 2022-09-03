@@ -1,4 +1,4 @@
-const addProduct = async (
+const addAnnouncement = async (
     state,
     { caller: _caller, input: { address } }
 ) => {
@@ -7,7 +7,7 @@ const addProduct = async (
     return { state };
 };
 
-const removeProduct = async (
+const removeAnnouncement = async (
     state,
     { caller: _caller, input: { address } }
 ) => {
@@ -19,11 +19,11 @@ const removeProduct = async (
 };
 
 export function handle(state, action){
-    switch (input.function) {
-        case 'addProduct':
-            return addProduct(state, action);
-        case 'removeProduct':
-            return removeProduct(state, action);
+    switch (action.input.function) {
+        case 'addAnnouncement':
+            return addAnnouncement(state, action);
+        case 'removeAnnouncement':
+            return removeAnnouncement(state, action);
         default:
             return state.announcements; 
     }
