@@ -2,9 +2,9 @@ import AddProductForm from './AddProductForm';
 import AnnouncementsListning from './AnnouncementsListning';
 import ResponsiveAppBar from './ResponsiveAppBar';
 
-window.addEventListener("arweaveWalletLoaded", () => {
-  window.arweaveWallet.connect(["ACCESS_ADDRESS", "ACCESS_PUBLIC_KEY", "SIGN_TRANSACTION"]);
-});
+// window.addEventListener("arweaveWalletLoaded", () => {
+//   window.arweaveWallet.connect(["ACCESS_ADDRESS", "ACCESS_PUBLIC_KEY", "SIGN_TRANSACTION"]);
+// });
 
 function App() {
   const showListening = window.location.pathname === "/";
