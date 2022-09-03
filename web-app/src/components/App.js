@@ -1,6 +1,5 @@
 import AddProductForm from './AddProductForm';
-import './App.css';
-import ProductsListning from './ProductsListning';
+import AnnouncementsListning from './AnnouncementsListning';
 import ResponsiveAppBar from './ResponsiveAppBar';
 
 window.addEventListener("arweaveWalletLoaded", () => {
@@ -14,7 +13,7 @@ function App() {
     <div className="App">
       <ResponsiveAppBar />
       {showListening ?
-          <ProductsListning />
+          <AnnouncementsListning />
         :
           <AddProductForm />
       }

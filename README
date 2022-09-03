@@ -63,3 +63,5 @@ $ npm start
 
 # TODO
 - get rid of `./api` part
+- Adding 'Pick-Up location' field
+- To skip ARweave Gateway usage

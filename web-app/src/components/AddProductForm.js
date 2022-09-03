@@ -3,8 +3,8 @@ import Arweave from 'arweave';
 import { WarpFactory } from 'warp-contracts/web';
 import TextField from '@mui/material/TextField';
 import { Button, Grid, FormControl, InputLabel, OutlinedInput, InputAdornment, Typography } from '@mui/material';
-import generateAnnouncement from './helpers/generateAnnouncement';
-import { AR_PLACE_CONTRACT_ADDRESS } from './consts';
+import generateAnnouncement from '../helpers/generateAnnouncement';
+import { AR_PLACE_CONTRACT_ADDRESS } from '../consts';
 
 const arweave = Arweave.init({
     host: "arweave.net",
@@ -23,6 +23,8 @@ export default function AddProductForm() {
     const [productARAddress, setProductARAddress] = useState();
 
     const [contact, setContact] = useState("");
+
+    const isSubmittable = title && description && price && contact && photo && !photoARAddress && !productARAddress
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
@@ -69,25 +71,6 @@ export default function AddProductForm() {
             setPhotoARAddress(transaction.id);
         };
         reader.readAsArrayBuffer(photo);
-
-        // // Create an object of formData
-        // const formData = new FormData();
-    
-        // // Update the formData object
-        // formData.append(
-        //     "myFile",
-        //     photo,
-        //     photo.name
-        // );
-    
-        // // Details of the uploaded file
-        // console.log("upload", photo);
-        
-        // // Request made to the backend api
-        // // Send formData object
-        // // axios.post("api/uploadfile", formData);
-
-        // console.log("submit");
     };
 
     // step 2: upload json with product details and photo arweave transaction hash
@@ -104,7 +87,6 @@ export default function AddProductForm() {
             await arweave.transactions.sign(transaction);
             await arweave.transactions.post(transaction);
             setProductARAddress(transaction.id);
-            console.log("transaction 2", transaction);
         });
 
     },[photoARAddress]);
@@ -116,14 +98,12 @@ export default function AddProductForm() {
         }
 
         const contract = warp.contract(AR_PLACE_CONTRACT_ADDRESS).connect('use_wallet');
-        console.log("contract", contract);
-        console.log('id', productARAddress)
+
         contract.writeInteraction({function: 'addAnnouncement', address: productARAddress}).then(({ originalTxId }) => {
-            console.log("originalTxId", originalTxId);
+            window.location.href = '/'; // redirect to home after the announcement has been added
         })
     }, [productARAddress]);
 
-    const isSubmittable = title && description && price && contact && photo && !photoARAddress && !productARAddress
     return (
         <Grid container spacing={2} justifyContent={"center"}>
             <Grid item xs={10} mt={2}>
@@ -175,8 +155,8 @@ export default function AddProductForm() {
                     label="Contact"
                 />
             </Grid>
-            <Grid item xs={3}>
-                <Button variant="contained" size="large" onClick={handleOnSubmit}>
+            <Grid item xs={10}>
+                <Button disabled={!isSubmittable} variant="contained" size="large" onClick={handleOnSubmit}>
                     Dodaj
                 </Button>
             </Grid>
