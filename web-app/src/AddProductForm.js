@@ -4,8 +4,7 @@ import { WarpFactory } from 'warp-contracts/web';
 import TextField from '@mui/material/TextField';
 import { Button, Grid, FormControl, InputLabel, OutlinedInput, InputAdornment, Typography } from '@mui/material';
 import generateAnnouncement from './helpers/generateAnnouncement';
-
-const ARPlaceContractAddress = "Z_2TgMpZv9YgfVim1FFliXpsmQj5YU37qEiEu0gejCI";
+import { AR_PLACE_CONTRACT_ADDRESS } from './consts';
 
 const arweave = Arweave.init({
     host: "arweave.net",
@@ -116,7 +115,7 @@ export default function AddProductForm() {
             return;
         }
 
-        const contract = warp.contract(ARPlaceContractAddress).connect('use_wallet');
+        const contract = warp.contract(AR_PLACE_CONTRACT_ADDRESS).connect('use_wallet');
         console.log("contract", contract);
         console.log('id', productARAddress)
         contract.writeInteraction({function: 'addAnnouncement', address: productARAddress}).then(({ originalTxId }) => {

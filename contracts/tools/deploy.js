@@ -13,7 +13,7 @@ const warp = WP.WarpFactory.forMainnet();
 // const arweave = warp.arweave;
 
 const jwk = JSON.parse(fs.readFileSync(
-    path.join(__dirname, '../my-jwk.json'),
+    path.join(__dirname, '../jwt.json'),
     'utf8'
 ));
 

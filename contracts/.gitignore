@@ -23,5 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 /cache
-/my-jwk.json
-/my-address.json
+/jwt.json
+/my-address.txt
