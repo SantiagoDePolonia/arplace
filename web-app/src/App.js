@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import AddProductForm from './AddProductForm';
 import './App.css';
 import ProductsListning from './ProductsListning';
@@ -8,7 +9,14 @@ window.addEventListener("arweaveWalletLoaded", () => {
 });
 
 function App() {
+  const [announcements, setAnnouncements] = useState();
+  // useEffect(() => {
+  //   const contract = warp.contract(contractTxId).connect(this.wallet);
+  //   const { cachedValue } = await contract.readState();
+  
+  // })  
   const showListening = window.location.pathname === "/";
+
   return (
     <div className="App">
       <ResponsiveAppBar />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import Arweave from 'arweave';
 
@@ -11,6 +11,19 @@ const arweave = Arweave.init({
 });
 
 const ProductsListning = () => {
+    const [announcements, setAnnouncements] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:3001/api/announcements').then(response => {
+
+        // TODO: Add error reporting
+            return response.json();
+        }).then(json => {
+            setAnnouncements(json?.state?.announcements ?? []);
+        });
+    }, []);
+
+    console.log("announcements", announcements);
+
     const products = [
         {
             "title": "Phone for sell - Samsung A70 - used",
@@ -37,6 +50,7 @@ const ProductsListning = () => {
             "added": "2022-09-01"
         }
     ];
+
     const onClick = async () => {
         let transaction = await arweave.createTransaction({
             data: "Some Data"
@@ -44,6 +58,7 @@ const ProductsListning = () => {
         transaction.addTag('Content-Type', 'text/html');
         arweave.transactions.sign(transaction);    
     };
+
     return (
         <Grid container spacing={2}>
             {products.map((product, index) => (
@@ -57,7 +72,10 @@ const ProductsListning = () => {
                             alt="Product photo"
                         />
                         <CardContent>
-                            <Button onClick={onClick}>Test</Button>
+                            {/*
+                                ADD REMOVE BUTTON IF THE USER EXISTS
+                                <Button onClick={onClick}>Test</Button>
+                            */}
                             <Typography>
                                 {product.description}
                             </Typography>

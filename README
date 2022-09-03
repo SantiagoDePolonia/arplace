@@ -1,0 +1,20 @@
+# AR place documentation
+
+The announcements withot 3rd party.
+
+## Technical
+
+The project contains 3 subprojects divided into directories:
+- api
+- contracts
+- web-app
+
+#### API
+API for featching announcements from specific smart contract on WARP network. wep-app is API consumer.
+
+#### contract
+The folder contains smart contracts source code and toolset for generating arweave wallets and deploying smart contracts to ARweave blockchain.
+
+#### web-app
+The folder contains React SPA (Single Page Application) web app for presenting and adding announcements with ARConnect browser wallet.
+

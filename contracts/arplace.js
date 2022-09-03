@@ -1,17 +1,30 @@
+const addProduct = async (
+    state,
+    { caller: _caller, input: { address } }
+) => {
+    state.announcements.push(address)
+
+    return { state };
+};
+
+const removeProduct = async (
+    state,
+    { caller: _caller, input: { address } }
+) => {
+    const filteredState = state.announcements.filter(an => (an !== address));
+
+    return {
+        state: filteredState
+    };
+};
+
 export function handle(state, action){
-    if (action.input.function === 'Twitter') {
-        state.twitter = true;
-      }
-      if (action.input.function === 'ArWallet') {
-        state.arWallet = true;
-      }
-    
-      if (action.input.function === 'arVerify') {
-        state.arVerify = true
-      }
-      if (state.twitter && state.arVerify && wallet) {
-        state.mintNft = true;
-      }
-      return mintNFt; 
+    switch (input.function) {
+        case 'addProduct':
+            return addProduct(state, action);
+        case 'removeProduct':
+            return removeProduct(state, action);
+        default:
+            return state.announcements; 
     }
-    
+}
